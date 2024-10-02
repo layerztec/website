@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LZ</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Ubuntu, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            background-color: #fff;
+        }
+
+        /* Horizontal sliding bar */
+        .horizontal-bar {
+            position: absolute;
+            bottom: 0;
+            left: -100%; /* Start off-screen */
+            width: 100%;
+            height: 25vh; /* 25% of the viewport height */
+            background-color: #f2a900; /* Orange background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInHorizontal 2s forwards;
+        }
+
+        .horizontal-bar span {
+            color: white; /* White text */
+            font-size: 3em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        /* Vertical bars container */
+        .vertical-bars {
+            display: flex;
+            height: 75vh; /* The remaining 75% of the viewport */
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        /* Vertical bars styling */
+        .vertical-bar {
+            flex: 1; /* Divide space equally for 6 bars */
+            height: 100%; /* Fill from top to the horizontal bar */
+            position: relative;
+            transform: translateY(100%); /* Start from bottom */
+            opacity: 0; /* Initially hidden */
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        /* Different colors for vertical bars */
+        .vertical-bar:nth-child(1) { background-color: #252f4a; }
+        .vertical-bar:nth-child(2) { background-color: #1E8079; }
+        .vertical-bar:nth-child(3) { background-color: black; }
+        .vertical-bar:nth-child(4) { background-color: #eae7e1; }
+        .vertical-bar:nth-child(5) { background-color: purple; }
+        .vertical-bar:nth-child(6) { background-color: pink; }
+
+        /* Text overlay styling */
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg); /* Rotate text vertically */
+            color: #fff;
+            font-size: 2em;
+            font-weight: bold;
+            opacity: 0; /* Text hidden until bar slides in */
+            transition: opacity 0.5s ease-in;
+        }
+
+        /* Animation for horizontal sliding bar */
+        @keyframes slideInHorizontal {
+            0% { left: -100%; }
+            100% { left: 0; }
+        }
+
+        /* White overlay */
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            opacity: 0; /* Initially invisible */
+            transition: opacity 1s ease;
+            pointer-events: none; /* Prevent interaction */
+            z-index: 10; /* On top of everything */
+        }
+
+        /* Mailchimp form styling */
+        .mailchimp-form-container {
+            width: 100%;
+            max-width: 500px; /* Limit the form width to 500px */
+            margin: 0 auto;
+            background-color: #fff; 
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 11; /* On top of the white overlay */
+        }
+
+        .mailchimp-form-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+	    color: #1E3A8A;
+            /*  text-transform: uppercase; Make the heading all caps */
+        }
+
+	 .mailchimp-form-container h3 {
+            font-size: 0.75em;
+            margin-bottom: 20px;
+	    color: #1E3A8A;
+            /*  text-transform: uppercase; Make the heading all caps */
+        }
+
+        .mailchimp-form-container input[type="email"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .mailchimp-form-container input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #F97316;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Responsive styling */
+        @media screen and (max-width: 768px) {
+            .vertical-bar {
+                flex: 1;
+            }
+	
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slider container -->
+    <div class="slider-container">
+        <!-- Horizontal sliding bar -->
+        <div class="horizontal-bar">
+            <span>₿ITCOIN</span>
+        </div>
+        
+        <!-- Vertical bars with text overlay -->
+        <div class="vertical-bars">
+            <div class="vertical-bar">
+                <div class="text-overlay">LIGHTNING</div>
+            </div>
+            <div class="vertical-bar">
+                <div class="text-overlay">LIQUID</div>
+            </div>
+            <div class="vertical-bar">
+                <div class="text-overlay">ROOTSTOCK</div>
+            </div>
+            <div class="vertical-bar">
+                <div class="text-overlay">STACKS</div>
+            </div>
+            <div class="vertical-bar">
+                <div class="text-overlay">RGB</div>
+            </div>
+            <div class="vertical-bar">
+                <div class="text-overlay">More</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- White overlay to fade in with 80% opacity -->
+    <div class="white-overlay" id="white-overlay"></div>
+
+    <!-- Mailchimp Signup Form -->
+    <div class="mailchimp-form-container" id="mailchimp-form">
+        <h2>LAYER<span style="color: #F97316">Z</span> WALLET IS COMING SOON</h2>
+	<h3>a bitcoin wallet to manage all layer 2 protocols</h3>
+        
+	<form action="https://layerzwallet.us11.list-manage.com/subscribe/post?u=d7c066db153f5efc6f5d2f287&amp;id=80854c9693&amp;f_id=0024e8e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
+            <input type="email" name="EMAIL" placeholder="Enter your email" required>
+            <input type="submit" value="Keep Me Informed">
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const horizontalBar = document.querySelector('.horizontal-bar');
+            const bitcoinText = horizontalBar.querySelector('span');
+            const verticalBars = document.querySelectorAll('.vertical-bar');
+            const whiteOverlay = document.getElementById('white-overlay');
+            const mailchimpForm = document.getElementById('mailchimp-form');
+            let delay = 0;
+
+            // Slide in the horizontal bar and then reveal Bitcoin text
+            horizontalBar.addEventListener('animationend', function () {
+                bitcoinText.style.opacity = 1; // Make Bitcoin text visible
+
+                // Slide in vertical bars one by one from right to left
+                verticalBars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        // Slide each bar individually
+                        bar.style.transform = 'translateY(0)';
+                        bar.style.opacity = 1;
+
+                        // After the vertical bar is fully slid in, reveal the text
+                        setTimeout(() => {
+                            const textOverlay = bar.querySelector('.text-overlay');
+                            textOverlay.style.opacity = 1; // Show the text
+                        }, 1000); // Delay text appearance until bar is fully loaded
+                    }, delay * 1000); // Each bar waits before sliding in
+                    delay += 1; // Delay increased for each subsequent bar
+                });
+            });
+
+            // Show the white overlay and Mailchimp form after the last vertical bar has loaded
+            setTimeout(function () {
+                whiteOverlay.style.opacity = 0.8; // Show white overlay with 50% opacity
+                mailchimpForm.style.display = "block"; // Show the Mailchimp form
+            }, 10000); // Delay ensures it's after all bars load (6 bars * 1s delay + 1s animation time)
+        });
+    </script>
+
+</body>
+</html>
