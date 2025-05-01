@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Bitcoin - LayerzWallet</title>
+</head>
+<body>
+    <script>
+        const u = new URLSearchParams(window.location.search);
+        const address = u.get('address') || '';
+        window.location = `https://buy.onramper.com?apiKey=pk_prod_01JQ4HD3QF9BANEHNQMDT4F8ZT&mode=buy&defaultCrypto=btc&onlyCryptos=btc&wallets=btc:${address}&containerColor=ffffff&primaryColor=241d1c&secondaryColor=ffffff&cardColor=f6f7f9&primaryTextColor=141519&secondaryTextColor=6b6f80&primaryBtnTextColor=ffffff&borderRadius=0.79&wgBorderRadius=0`;
+    </script>
+</body>
+</html>
