@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap - LayerzWallet</title>
+
+    <script type="text/javascript">
+
+        isReady = true;
+
+        var u = new URLSearchParams(window.location.search);
+        var settleAddress = u.get('settleAddress') || '';
+        var defaultDepositMethodId = u.get('defaultDepositMethodId') || ''; // posible arguments are: btc, liquid, rbtc
+        var defaultSettleMethodId = u.get('defaultSettleMethodId') || ''; // posible arguments are: btc, liquid, rbtc
+
+        if (!settleAddress)  {
+            alert('settleAddress is required');
+            isReady = false;
+        }
+
+        if (!defaultDepositMethodId)  {
+            alert('defaultDepositMethodId is required');
+            isReady = false;
+        }
+
+        if (!defaultSettleMethodId)  {
+            alert('defaultSettleMethodId is required');
+            isReady = false;
+        }
+
+        window.__SIDESHIFT__ = {
+          parentAffiliateId: "uYB9AagC9", // LayerzWallet affiliate id
+          defaultDepositMethodId,
+          defaultSettleMethodId,
+          settleAddress,
+          type: "variable",
+          settleAmount: undefined,
+          theme: "system",
+        }
+
+        
+    </script>
+    
+    <script src="https://sideshift.ai/static/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+
+
+    
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            if (!isReady) return;
+
+            /**
+             * Sideshift plugin library
+             */
+            const sideshift = window.sideshift;
+
+            sideshift.show();
+
+            /**
+             * Listen for settled event
+             * (happens when a shift has been settled with at least one deposit)
+             */
+            sideshift.addEventListener('settled', (deposits) => {
+            console.log(deposits);
+            // deposits = [{
+            //   "depositId": "de6279c2101e211cebbc",
+            //   "createdAt": "1555820836956",
+            //   "createdAt": "1555820836970",
+            //   "depositAmount": "0.0000346",
+            //   "settleRate": "17.5324",
+            //   "settleAmount": "0.0006066072",
+            //   "networkFeePaidUsd": "3.14",
+            //   "status": "received" || "settling" || "settled" || "settle_fail" || "rejected" || "refund" || "refunding" || "refunded" || "refund_fail",
+            //   "settleTxid": "dvmeagwdkuy34grkuy32dgby3k4ugdb2ykgyu23yu3k2",
+            //   "refundAddress": null || "fjdhvbehv543ev4h35bg4u5i34jhcbru3hjfhbj34",
+            //   "refundTxid": null || "dfjbd1hjb42hjb5uhj3bh4j2r3b2hjbrt43hj23bruhj3b",
+            //   "reason": null || "admin" || "refund" || "insufficient funds"
+            //   "order": order (see 'order' event)
+            // }]
+            });
+
+            /**
+             * Listen for deposit event
+             * (happens when a deposit is made)
+             */
+            sideshift.addEventListener('deposit', (deposits) => {
+            console.log(deposits);
+            // deposits = [{
+            //   "depositId": "de6279c2101e211cebbc",
+            //   "createdAt": "1555820836956",
+            //   "createdAt": "1555820836970",
+            //   "depositAmount": "0.0000346",
+            //   "settleRate": "17.5324",
+            //   "settleAmount": "0.0006066072",
+            //   "networkFeeAmount": null,
+            //   "status": "received" || "settling" || "settled" || "settle_fail" || "rejected" || "refund" || "refunding" || "refunded" || "refund_fail",
+            //   "settleTxid": "dvmeagwdkuy34grkuy32dgby3k4ugdb2ykgyu23yu3k2",
+            //   "refundAddress": null || "fjdhvbehv543ev4h35bg4u5i34jhcbru3hjfhbj34",
+            //   "refundTxid": null || "dfjbd1hjb42hjb5uhj3bh4j2r3b2hjbrt43hj23bruhj3b",
+            //   "reason": null || "admin" || "refund" || "insufficient funds"
+            //   "order": order (see 'order' event)
+            // }]
+            })
+
+            /**
+             * Listen for order event
+             * (happens when order is supplied to user)
+             */
+            sideshift.addEventListener('order', (order) => {
+            console.log(order);
+            // order = {
+            //     "orderId": "de6279c2101e211cebbc",
+            //     "createdAt": "1555820836956",
+            //     "depositMethodId": "btc",
+            //     "settleMethodId": "bch",
+            //     "depositAddress": {
+            //       "address": "3Nh4fgyUpdcihZt5f9Ei1QJpREvRDh2TqZ"
+            //     },
+            //     "depositMax": "1.867",
+            //     "depositMin": "0.0001867"
+            //   }
+            // }
+            })
+        });
+
+    </script>
+</body>
+</html>
