@@ -13,6 +13,7 @@
         var settleAddress = u.get('settleAddress') || '';
         var defaultDepositMethodId = u.get('defaultDepositMethodId') || ''; // posible arguments are: btc, liquid, rbtc
         var defaultSettleMethodId = u.get('defaultSettleMethodId') || ''; // posible arguments are: btc, liquid, rbtc
+        var settleAmount = u.get('settleAmount') || undefined;
 
         if (!settleAddress)  {
             alert('settleAddress is required');
@@ -35,7 +36,7 @@
           defaultSettleMethodId,
           settleAddress,
           type: "variable",
-          settleAmount: undefined,
+          settleAmount,
           theme: "system",
         }
 
