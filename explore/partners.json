@@ -17,14 +17,14 @@
     "name": "Keystone",
     "network": "bitcoin",
     "url": "https://bit.ly/3Q6Rz5m",
-    "imgUrl": "",
+    "imgUrl": "https://pbs.twimg.com/profile_images/1787649407963574272/eHYwt7dk_400x400.jpg",
     "description": "Secure Cold Wallet for Effortless Transactions"
   },
   {
     "name": "Check out Botanix Dapps",
-    "network": "botanix_testnet",
-    "url": "https://botanixlabs.xyz/en/testnet",
-    "imgUrl": "",
+    "network": "botanix",
+    "url": "https://botanixlabs.com/use",
+    "imgUrl": "https://bridge.botanixlabs.com/images/white-logo.png",
     "description": ""
   },
   {
@@ -42,17 +42,24 @@
     "description": ""
   },
   {
-    "name": "Arkade",
-    "network": "ark_mutinynet",
-    "url": "https://arkade.money/",
-    "imgUrl": "",
-    "description": "Progressive web-app to manage Ark bitcoins on the go"
-  },
-  {
     "name": "Bridge",
     "network": "botanix",
     "url": "https://bridge.botanixlabs.com",
-    "imgUrl": "",
+    "imgUrl": "https://yield.botanixlabs.com/images/white-logo.png",
     "description": "Bridge Bitcoin to Botanix"
+  },
+  {
+    "name": "Yield",
+    "network": "botanix",
+    "url": "https://yield.botanixlabs.com/",
+    "imgUrl": "https://bridge.botanixlabs.com/images/white-logo.png",
+    "description": "Bitcoin in - More Bitcoin out. Backed by economic activity"
+  },
+  {
+    "name": "Oku Trade",
+    "network": "rootstock",
+    "url": "https://oku.trade/?inputChain=rootstock",
+    "imgUrl": "",
+    "description": ""
   }
 ]
