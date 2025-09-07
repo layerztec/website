@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore Partners</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.4;
+      background: Canvas;
+      color: CanvasText;
+    }
+    header {
+      padding: 16px;
+      text-align: center;
+    }
+    .partners {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+      padding: 16px;
+      margin: 0;
+    }
+    .partner a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 140px;
+      padding: 12px;
+      border: 1px solid color-mix(in oklab, CanvasText 15%, transparent);
+      border-radius: 12px;
+      background: color-mix(in oklab, Canvas 95%, CanvasText 5%);
+      text-decoration: none;
+      color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .partner a:hover,
+    .partner a:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px color-mix(in oklab, CanvasText 15%, transparent);
+      border-color: color-mix(in oklab, CanvasText 30%, transparent);
+      outline: none;
+    }
+    .partner img {
+      max-width: 100%;
+      max-height: 64px;
+      object-fit: contain;
+      display: block;
+    }
+    .partner .title { font-size: 14px; font-weight: 600; text-align: center; }
+    .partner .subtitle { font-size: 12px; text-align: center; color: color-mix(in oklab, CanvasText 70%, transparent); }
+    @media (min-width: 960px) {
+      .partners { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .partner a { min-height: 160px; }
+      .partner img { max-height: 80px; }
+    }
+  </style>
+  <script>
+    async function loadPartners() {
+      const container = document.getElementById('partners');
+      try {
+        const response = await fetch('./partners.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error('Failed to load partners.json');
+        const partners = await response.json();
+
+        if (!Array.isArray(partners)) throw new Error('partners.json must be an array');
+
+        const getHostname = (url) => {
+          try { return new URL(url).hostname; } catch { return null; }
+        };
+        const getFaviconSources = (url) => {
+          const hostname = getHostname(url);
+          const sources = [];
+          if (hostname) {
+            sources.push(`https://icons.duckduckgo.com/ip3/${hostname}.ico`);
+            sources.push(`https://www.google.com/s2/favicons?sz=64&domain_url=${encodeURIComponent(url)}`);
+          }
+          return sources;
+        };
+        const appendImageWithFallbacks = (anchor, sources, altText) => {
+          if (!sources || sources.length === 0) return false;
+          const img = document.createElement('img');
+          img.alt = altText || 'Partner';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.referrerPolicy = 'no-referrer';
+          let idx = 0;
+          const tryNext = () => {
+            if (idx >= sources.length) {
+              img.remove();
+              return false;
+            }
+            img.src = sources[idx++];
+            return true;
+          };
+          img.addEventListener('error', () => {
+            if (!tryNext()) {
+              // final failure handled by caller
+            }
+          });
+          tryNext();
+          anchor.appendChild(img);
+          return true;
+        };
+
+        const fragment = document.createDocumentFragment();
+        for (const partner of partners) {
+          const listItem = document.createElement('li');
+          listItem.className = 'partner';
+
+          const anchor = document.createElement('a');
+          anchor.href = partner.url || '#';
+          anchor.rel = 'noopener noreferrer';
+          if (partner.name) {
+            anchor.title = partner.name;
+            anchor.setAttribute('aria-label', `Visit ${partner.name}`);
+          }
+
+          const provided = (partner.imgUrl || '').trim();
+          const sources = [];
+          if (provided) sources.push(provided);
+          sources.push(...getFaviconSources(partner.url || ''));
+
+          const appended = appendImageWithFallbacks(anchor, sources, partner.name || getHostname(partner.url) || 'Partner');
+          // Always show name
+          const title = document.createElement('div');
+          title.className = 'title';
+          title.textContent = partner.name || getHostname(partner.url) || 'Partner';
+          anchor.appendChild(title);
+          // Optional subtitle as description
+          if (partner.description) {
+            const subtitle = document.createElement('div');
+            subtitle.className = 'subtitle';
+            subtitle.textContent = partner.description;
+            anchor.appendChild(subtitle);
+          }
+
+          listItem.appendChild(anchor);
+          fragment.appendChild(listItem);
+        }
+        container.appendChild(fragment);
+      } catch (error) {
+        const message = document.createElement('p');
+        message.textContent = 'Unable to load partners at this time.';
+        message.style.padding = '16px';
+        container.replaceWith(message);
+        // Also log for debugging
+        console.error(error);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadPartners);
+  </script>
+  <!-- Minimal inline styles and JS keep this page easily deployable as static -->
+</head>
+<body>
+  <header>
+    <h1>Explore</h1>
+    <p>Discover services and apps across networks.</p>
+  </header>
+  <ul id="partners" class="partners" aria-live="polite"></ul>
+</body>
+</html>
+
+
