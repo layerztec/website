@@ -13,19 +13,27 @@
       --card-border: color-mix(in oklab, CanvasText 14%, transparent);
       --card-border-hover: color-mix(in oklab, CanvasText 28%, transparent);
       --muted: color-mix(in oklab, CanvasText 70%, transparent);
+      --accent: #7c5cff;
+      --accent-2: #ff6a95;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       line-height: 1.4;
-      background: Canvas;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+        radial-gradient(1200px 600px at 110% 0%, color-mix(in oklab, var(--accent-2) 10%, transparent), transparent 55%),
+        Canvas;
       color: CanvasText;
     }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
     header { text-align: center; padding: 24px 0 8px; }
-    header h1 { margin: 0; font-size: 32px; letter-spacing: -0.02em; }
+    header h1 { margin: 0; font-size: 34px; letter-spacing: -0.02em; line-height: 1.1; }
+    header h1 .accent { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     header p { margin: 8px 0 0; color: var(--muted); }
+    .filter { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--card-border); background: color-mix(in oklab, Canvas 92%, CanvasText 8%); }
     .partners {
       list-style: none;
       display: grid;
@@ -42,20 +50,30 @@
       gap: 10px;
       min-height: 200px;
       padding: 16px;
-      border: 1px solid var(--card-border);
+      border: 1px solid transparent;
       border-radius: var(--radius);
-      background: var(--card-bg);
+      background:
+        linear-gradient(180deg, color-mix(in oklab, var(--accent) 6%, transparent), color-mix(in oklab, CanvasText 8%, transparent)) border-box,
+        linear-gradient(180deg, color-mix(in oklab, Canvas 98%, CanvasText 2%), color-mix(in oklab, Canvas 94%, CanvasText 6%)) padding-box;
       text-decoration: none;
       color: inherit;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow:
+        0 0 0 1px color-mix(in oklab, CanvasText 8%, transparent) inset,
+        0 8px 24px color-mix(in oklab, CanvasText 10%, transparent);
     }
     .partner a:hover,
     .partner a:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px color-mix(in oklab, CanvasText 18%, transparent);
-      border-color: var(--card-border-hover);
+      transform: translateY(-4px);
+      box-shadow:
+        0 0 0 1px color-mix(in oklab, CanvasText 10%, transparent) inset,
+        0 14px 36px color-mix(in oklab, CanvasText 20%, transparent);
+      background:
+        linear-gradient(180deg, color-mix(in oklab, var(--accent) 12%, transparent), color-mix(in oklab, CanvasText 10%, transparent)) border-box,
+        linear-gradient(180deg, color-mix(in oklab, Canvas 99%, CanvasText 1%), color-mix(in oklab, Canvas 93%, CanvasText 7%)) padding-box;
       outline: none;
     }
+    .partner a:focus-visible { box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent), 0 12px 32px color-mix(in oklab, CanvasText 18%, transparent); }
     .logo {
       width: 100%;
       height: 96px;
@@ -63,7 +81,8 @@
       align-items: center;
       justify-content: center;
       border-radius: calc(var(--radius) - 4px);
-      background: color-mix(in oklab, Canvas 92%, CanvasText 8%);
+      background:
+        linear-gradient(180deg, color-mix(in oklab, Canvas 96%, CanvasText 4%), color-mix(in oklab, Canvas 90%, CanvasText 10%));
       overflow: hidden;
     }
     .logo img {
@@ -71,16 +90,20 @@
       max-height: 72px;
       object-fit: contain;
       display: block;
-      filter: saturate(1.05);
+      filter: saturate(1.05) contrast(1.02);
     }
-    .partner .title { font-size: 15px; font-weight: 650; text-align: center; }
-    .partner .subtitle { font-size: 12px; text-align: center; color: var(--muted); }
+    .partner .title { font-size: 15px; font-weight: 650; text-align: center; letter-spacing: -0.01em; }
+    .partner .subtitle { font-size: 12px; text-align: center; color: var(--muted); max-width: 28ch; }
     .partner .meta { font-size: 11px; color: var(--muted); }
     @media (min-width: 960px) {
       .partners { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
       .partner a { min-height: 220px; }
       .logo { height: 110px; }
       .logo img { max-height: 84px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .partner a { transition: none; }
+      .partner a:hover, .partner a:focus-visible { transform: none; box-shadow: none; }
     }
   </style>
   <script>
@@ -137,6 +160,15 @@
         };
 
         const list = networkFilter ? partners.filter(p => (p && p.network) === networkFilter) : partners;
+        const filterEl = document.getElementById('filter');
+        if (filterEl) {
+          if (networkFilter) {
+            filterEl.innerHTML = `Filtering by network: <span class="badge">${networkFilter}</span>`;
+            filterEl.hidden = false;
+          } else {
+            filterEl.hidden = true;
+          }
+        }
         const fragment = document.createDocumentFragment();
         for (const partner of list) {
           const listItem = document.createElement('li');
@@ -195,11 +227,14 @@
   <!-- Minimal inline styles and JS keep this page easily deployable as static -->
 </head>
 <body>
-  <header>
-    <h1>Explore</h1>
-    <p>Discover services and apps across networks.</p>
-  </header>
-  <ul id="partners" class="partners" aria-live="polite"></ul>
+  <div class="wrap">
+    <header>
+      <h1><span class="accent">Explore</span> Partners</h1>
+      <p>Discover services and apps across networks.</p>
+      <p id="filter" class="filter" hidden></p>
+    </header>
+    <ul id="partners" class="partners" aria-live="polite"></ul>
+  </div>
 </body>
 </html>
 
