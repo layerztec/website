@@ -95,6 +95,9 @@
     .partner .title { font-size: 15px; font-weight: 650; text-align: center; letter-spacing: -0.01em; }
     .partner .subtitle { font-size: 12px; text-align: center; color: var(--muted); max-width: 28ch; }
     .partner .meta { font-size: 11px; color: var(--muted); }
+    @media (max-width: 640px) {
+      .partners { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
     @media (min-width: 960px) {
       .partners { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
       .partner a { min-height: 220px; }
