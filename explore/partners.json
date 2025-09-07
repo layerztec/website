@@ -1,0 +1,58 @@
+[
+  {
+    "name": "HodlHodl",
+    "network": "bitcoin",
+    "url": "https://hodlhodl.com/join/NPH2J",
+    "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAejGlNwvmchVooYPpUquqzQ7z0KahArwSVw&s",
+    "description": "Buy & sell bitcoin non-custodially, p2p"
+  },
+  {
+    "name": "Bitrefill",
+    "network": "bitcoin",
+    "url": "https://bitrefill.com",
+    "imgUrl": "https://pbs.twimg.com/media/GgHHK5GWkAAp_6z.png",
+    "description": "Buy gift cards with Bitcoin"
+  },
+  {
+    "name": "Keystone",
+    "network": "bitcoin",
+    "url": "https://bit.ly/3Q6Rz5m",
+    "imgUrl": "",
+    "description": "Secure Cold Wallet for Effortless Transactions"
+  },
+  {
+    "name": "Check out Botanix Dapps",
+    "network": "botanix_testnet",
+    "url": "https://botanixlabs.xyz/en/testnet",
+    "imgUrl": "",
+    "description": ""
+  },
+  {
+    "name": "Citrea Faucet",
+    "network": "citrea_testnet",
+    "url": "https://citrea.xyz/faucet",
+    "imgUrl": "",
+    "description": ""
+  },
+  {
+    "name": "Ecosystem",
+    "network": "citrea_testnet",
+    "url": "https://citrea.xyz/ecosystem",
+    "imgUrl": "",
+    "description": ""
+  },
+  {
+    "name": "Arkade",
+    "network": "ark_mutinynet",
+    "url": "https://arkade.money/",
+    "imgUrl": "",
+    "description": "Progressive web-app to manage Ark bitcoins on the go"
+  },
+  {
+    "name": "Bridge",
+    "network": "botanix",
+    "url": "https://bridge.botanixlabs.com",
+    "imgUrl": "",
+    "description": "Bridge Bitcoin to Botanix"
+  }
+]
