@@ -1,50 +1,48 @@
 #!/usr/bin/env bash
 
-FILE_PATH="partners-list.ts"
-FILE_PATH2="sum.ts"
+FILE_PATH_SUM="sum.ts"
 
-rm $FILE_PATH2 partner* networks*
+rm $FILE_PATH_SUM partner-info.ts networks.ts partners-list.ts
 
 
-wget  https://raw.githubusercontent.com/layerztec/layerzwallet/refs/heads/master/shared/types/networks.ts
+wget https://raw.githubusercontent.com/layerztec/layerzwallet/refs/heads/master/shared/types/networks.ts
 wget https://raw.githubusercontent.com/layerztec/layerzwallet/refs/heads/master/shared/models/partners-list.ts
 wget https://raw.githubusercontent.com/layerztec/layerzwallet/refs/heads/master/shared/types/partner-info.ts
 
 
-if [[ ! -f "$FILE_PATH" ]]; then
-echo "Error: file not found after download: $FILE_PATH" >&2
+if [[ ! -f "partners-list.ts" ]]; then
+echo "Error: file not found after download: partners-list.ts" >&2
 exit 1
 fi
 
 tmp_file=$(mktemp)
-tail -n +3 -- "$FILE_PATH" | head -n -3 > "$tmp_file"
-mv -- "$tmp_file" "$FILE_PATH"
-echo "Trimmed $FILE_PATH"
+tail -n +3 -- "partners-list.ts" | head -n -3 > "$tmp_file"
+mv -- "$tmp_file" "partners-list.ts"
+echo "Trimmed partners-list.ts"
 
 
 
 # Remove the first line from partner-info.ts
-FILE_PATH_PARTNER_INFO="partner-info.ts"
-if [[ ! -f "$FILE_PATH_PARTNER_INFO" ]]; then
-  echo "Error: file not found: $FILE_PATH_PARTNER_INFO" >&2
+if [[ ! -f "partner-info.ts" ]]; then
+  echo "Error: file not found: partner-info.ts" >&2
   exit 1
 fi
 
 
 tmp_file_partner_info=$(mktemp)
-tail -n +2 -- "$FILE_PATH_PARTNER_INFO" > "$tmp_file_partner_info"
-mv -- "$tmp_file_partner_info" "$FILE_PATH_PARTNER_INFO"
-echo "Removed first line from $FILE_PATH_PARTNER_INFO"
+tail -n +2 -- "partner-info.ts" > "$tmp_file_partner_info"
+mv -- "$tmp_file_partner_info" "partner-info.ts"
+echo "Removed first line from partner-info.ts"
 
 
 
 
-cat networks.ts >> $FILE_PATH2
-cat partner-info.ts >> $FILE_PATH2
-cat partners-list.ts >> $FILE_PATH2
+cat networks.ts >> $FILE_PATH_SUM
+cat partner-info.ts >> $FILE_PATH_SUM
+cat partners-list.ts >> $FILE_PATH_SUM
 
 
-echo 'export { partnersList };' >> $FILE_PATH2
+echo 'export { partnersList };' >> $FILE_PATH_SUM
 
 
 bun run write-partners.ts
