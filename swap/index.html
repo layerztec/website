@@ -53,9 +53,15 @@
     
     <script type="text/javascript">
 
-        $(document).ready(function() {
+        $(document).ready(async function() {
 
             if (!isReady) return;
+
+            // wait for window.sideshift to be defined
+            while (!window.sideshift) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                console.log('waiting for window.sideshift');
+            }
 
             /**
              * Sideshift plugin library
