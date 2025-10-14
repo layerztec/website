@@ -43,7 +43,7 @@
         
     </script>
     
-    <script type="module" src="https://sideshift.ai/static/js/main.js"></script>
+    <script src="https://sideshift.ai/static/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -53,15 +53,9 @@
     
     <script type="text/javascript">
 
-        $(document).ready(async function() {
+        $(document).ready(function() {
 
             if (!isReady) return;
-
-            // wait for window.sideshift to be defined
-            while (!window.sideshift) {
-                await new Promise(resolve => setTimeout(resolve, 100));
-                console.log('waiting for window.sideshift');
-            }
 
             /**
              * Sideshift plugin library
