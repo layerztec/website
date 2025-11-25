@@ -113,7 +113,11 @@
     async function loadPartners() {
       const container = document.getElementById('partners');
       const params = new URLSearchParams(window.location.search);
-      const networkFilter = (params.get('network') || '').trim();
+      let networkFilter = (params.get('network') || '').trim();
+      if (networkFilter === 'lightning' || networkFilter === 'USDT') {
+        // override to bitcoin
+        networkFilter = 'bitcoin';
+      }
       try {
         const response = await fetch('./partners.json', { cache: 'no-cache' });
         if (!response.ok) throw new Error('Failed to load partners.json');
