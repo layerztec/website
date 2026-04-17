@@ -70,6 +70,13 @@
     "description": ""
   },
   {
+    "name": "Atlas",
+    "network": "rootstock",
+    "url": "https://atlas.rootstock.io",
+    "imgUrl": "",
+    "description": ""
+  },
+  {
     "name": "Bridge",
     "network": "citrea",
     "url": "https://citrea.xyz/bridge",
