@@ -1,12 +1,5 @@
 [
   {
-    "name": "BTC Map",
-    "network": "bitcoin",
-    "url": "https://btcmap.org/map",
-    "imgUrl": "",
-    "description": "Find places to spend sats wherever you are"
-  },
-  {
     "name": "Bitrefill",
     "network": "bitcoin",
     "url": "https://bitrefill.com",
