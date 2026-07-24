@@ -1,10 +1,10 @@
 [
   {
-    "name": "Bitrefill",
+    "name": "BTC Map",
     "network": "bitcoin",
-    "url": "https://bitrefill.com",
-    "imgUrl": "https://pbs.twimg.com/media/GgHHK5GWkAAp_6z.png",
-    "description": "Buy gift cards with Bitcoin"
+    "url": "https://btcmap.org/map",
+    "imgUrl": "",
+    "description": "Find places to spend sats wherever you are"
   },
   {
     "name": "Keystone",
@@ -12,13 +12,6 @@
     "url": "https://bit.ly/3Q6Rz5m",
     "imgUrl": "https://pbs.twimg.com/profile_images/1787649407963574272/eHYwt7dk_400x400.jpg",
     "description": "Secure Cold Wallet for Effortless Transactions"
-  },
-  {
-    "name": "Check out Botanix Dapps",
-    "network": "botanix",
-    "url": "https://botanixlabs.com/use",
-    "imgUrl": "https://bridge.botanixlabs.com/images/white-logo.png",
-    "description": ""
   },
   {
     "name": "Citrea Faucet",
@@ -33,20 +26,6 @@
     "url": "https://citrea.xyz/ecosystem",
     "imgUrl": "",
     "description": ""
-  },
-  {
-    "name": "Bridge",
-    "network": "botanix",
-    "url": "https://bridge.botanixlabs.com",
-    "imgUrl": "https://yield.botanixlabs.com/images/white-logo.png",
-    "description": "Bridge Bitcoin to Botanix"
-  },
-  {
-    "name": "Yield",
-    "network": "botanix",
-    "url": "https://yield.botanixlabs.com/",
-    "imgUrl": "https://bridge.botanixlabs.com/images/white-logo.png",
-    "description": "Bitcoin in - More Bitcoin out. Backed by economic activity"
   },
   {
     "name": "Oku Trade",
